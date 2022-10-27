@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+<a  href="{% url 'review:create'  %}"><h1>CREATE</h1></a>
 {% for review in reviews %}
     <a href="{% url 'review:detail' review.pk %}"><p>{{ review.title }}</p></a>
 {% endfor %}
