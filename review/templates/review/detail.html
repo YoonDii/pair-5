@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>{{ review.title }}</p>
+<p>{{ review.content }}</p>
+<p>{{ review.created_at }}</p>
+<p>{{ review.updated_at }}</p>
+{% if review.image %}
+    <p><img src='{{ review.image.url }}' alt='{{ review.image }}'></p>
+{% endif %}
+<form action="{% url 'review:delete' review.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="삭제">
+</form>
+<a href="{% url 'review:index' %}">index 페이지</a>
+{% endblock %}
