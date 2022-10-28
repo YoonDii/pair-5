@@ -11,8 +11,8 @@ likeFormTag.addEventListener('submit', function (event) {
   }).then((response) => {
     // 좋아요 아이콘 토글
     const heartIcon = document.querySelector('.heart-icon')
-    heartIcon.classList.toggle('bi-suit-heart')
-    heartIcon.classList.toggle('bi-suit-heart-fill')
+    heartIcon.classList.toggle('bi-heart')
+    heartIcon.classList.toggle('bi-heart-fill')
 
     // 좋아요 갯수 변경
     const heartCnt = document.querySelector('.like-cnt')

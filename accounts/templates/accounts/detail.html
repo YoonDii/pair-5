@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
   <h1 class='text-center my-3'>profile</h1>
   <div class="card">
     <div class="card-body">
       <p>ID:
-        {{ user.username }} </p>
+        {{ user.username }}
+      </p>
       <p>email:
         {{ user.email }}</p>
       <p>joined date:
-        {{ user.date_joined|date:'y-m-d' }}</p>
+        {{ user.date_joined|date:'y-m-d' }}
+      </p>
+      {% comment %} 팔로우 버튼 {% endcomment %}
       <div class="m-2">
         {% if request.user != user %}
           <div>
-            <form action="{% url 'accounts:follow' user.pk%}" method='POST'>
+            <form class='follow-form' data-user-pk='{{ user.pk }}'>
               {% csrf_token %}
               {% if request.user in user.followers.all %}
-                <input type="submit" class="btn btn-outline-secondary" value='Unfollow'>
+                <input type="submit" class="btn btn-outline-secondary follow-btn" value='Unfollow'>
               {% else %}
-                <input type="submit" class="btn btn-outline-secondary" value='Follow'>
+                <input type="submit" class="btn btn-outline-secondary follow-btn" value='Follow'>
               {% endif %}
             </form>
           </div>
@@ -26,9 +30,9 @@
       </div>
       <div class="d-flex">
         팔로잉 :
-        {{ user.followings.all|length }}
+        <span class='following-cnt'>{{ user.followings.all|length }}</span>
         / 팔로워 :
-        {{ user.followers.all|length }}
+        <span class='follower-cnt'>{{ user.followers.all|length }}</span>
       </div>
     </div>
   </div>
@@ -36,29 +40,39 @@
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">글</button>
-    
+
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">댓글</button>
     </li>
-    
+
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-      <br><p class="text-muted">{{ user.review_set.count }}개를 작성하였습니다.</p>
+      <br>
+      <p class="text-muted">{{ user.review_set.count }}개를 작성하였습니다.</p>
       {% for review in user.review_set.all %}
         <p>
           {{ forloop.counter }}.
           <a href="{% url 'review:detail' review.pk %}">{{ review.title }}</a>
         </p>
-      {% endfor %}</div>
-    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"><br><p class="text-muted">{{ user.comment_set.count }}개를 작성하였습니다.</p>
+      {% endfor %}
+    </div>
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0"><br>
+      <p class="text-muted">{{ user.comment_set.count }}개를 작성하였습니다.</p>
       {% for comment in user.comment_set.all %}
         <p>
-          {{ forloop.counter }} .
+          {{ forloop.counter }}
+          .
           <a href="{% url 'review:detail' comment.review_id %}">{{ comment.content }}</a>
         </p>
-      {% endfor %}</div>
-   
+      {% endfor %}
+    </div>
+
   </div>
 {% endblock content %}
+
+{% block js %}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="{% static 'js/accounts/detail.js' %}"></script>
+{% endblock js %}
