@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserCreationForm
+from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
@@ -75,7 +76,6 @@ def logout(request):
 
 def follow(request, pk):
     if request.user.is_authenticated:
-
         person = get_object_or_404(get_user_model(), pk=pk)
         if request.user == person:
             messages.warning(request, "스스로 팔로우를 할 수 없습니다.")
@@ -83,8 +83,16 @@ def follow(request, pk):
             # if request.user.followings.filter(pk=user_pk).exists():
         if person.followers.filter(pk=request.user.pk).exists():
             person.followers.remove(request.user)
+            is_followed = False
         else:
             person.followers.add(request.user)
+            is_followed = True
 
-        return redirect("accounts:detail", person.pk)
+        data = {
+            'is_followed': is_followed,
+            'following_cnt': person.followings.count(),
+            'follower_cnt': person.followers.count(),
+        }
+
+        return JsonResponse(data)
     return redirect("accounts:login")
