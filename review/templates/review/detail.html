@@ -55,12 +55,18 @@
   {% endif %}
   <hr>
   {% for comment in comments %}
-    <p>
-      {{ comment.user.username }}
-      |
-      {{ comment.content }}
-      <form action="{% url 'review:comment_delete' review.pk comment.pk %}" method="POST">{% csrf_token %}<input type="submit" value="삭제"></form>
-    </p>
+    <article class='comment-block-{{ comment.pk }}'>
+      <p class='comment-{{ comment.pk }}-content-container'>
+        {{ comment.user.username }}
+        |
+          <span class='comment-{{ comment.pk }}-content'>{{ comment.content }}</span>
+      </p>
+      <form action="{% url 'review:comment_delete' review.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+      </form>
+      <a href="{% url 'review:comment_update' review.pk comment.pk %}" class="btn btn-primary comment-update-btn" data-review-pk='{{ review.pk }}' data-comment-pk='{{ comment.pk }}'>수정</a>
+    </article>
     <hr>
     {% empty %}
     <p>아직 아무도 못본거라고 믿자,,</p>

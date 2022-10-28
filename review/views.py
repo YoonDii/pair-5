@@ -1,3 +1,4 @@
+from urllib import response
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CommentForm, ReviewForm
 from .models import Comment, Review
@@ -77,6 +78,33 @@ def comment_delete(request, comment_pk, review_pk):
     comment.delete()
     return redirect("review:detail", review_pk)
 
+def comment_update(request, review_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+
+    data = {
+        'comment_content': comment.content
+    }
+    
+    return JsonResponse(data)
+
+def comment_update_complete(request,review_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    comment_form = CommentForm(request.POST, instance=comment)
+
+    if comment_form.is_valid():
+        comment = comment_form.save()
+
+        data = {
+            'comment_content': comment.content,
+        }
+
+        return JsonResponse(data)
+    
+    data = {
+        'comment_content': comment.content,
+    }
+
+    return JsonResponse(data)
 
 @login_required
 def like(request, review_pk):
