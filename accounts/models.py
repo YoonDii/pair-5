@@ -17,4 +17,6 @@ class User(AbstractUser):
         },
     )
 
-    follwings = models.ManyToManyField('self', symmetrical=False, related_name='follwers')
+    followings = models.ManyToManyField(
+        "self", symmetrical=False, related_name="followers"
+    )

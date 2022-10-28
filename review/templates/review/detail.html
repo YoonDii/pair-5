@@ -4,18 +4,28 @@
 <h2 class="text-center">review</h2>
 <div></div>
 <p>Title : {{ review.title }}</p>
-
+<p> writer : <a href={% url 'accounts:detail' review.user.pk %}>{{review.user}}</a>
+    </p>
 <p>{{ review.created_at }}</p>
 <p>{{ review.updated_at }}</p>
 {% if review.image %}
     <p><img src='{{ review.image.url }}' alt='{{ review.image }}' style="width: 550px; ">
     </p>
 {% endif %}
+
 <p>content : {{ review.content }}</p>
+{% if request.user == review.user %}
+<div class="d-flex ">
+<p>
+  <a href="{% url 'review:update' review.pk %}"  class="btn btn-outline-dark" >수정</a>
+</p>
+{% endif %}
 <form action="{% url 'review:delete' review.pk %}" method="POST">
     {% csrf_token %}
-    <input type="submit" value="삭제">
+    <input type="submit" class="btn btn-outline-danger mx-2" value="삭제">
 </form>
+</div>
+
 
 <form action="{% url 'review:like' review.pk %}" method='POST'>
     {% csrf_token %} {{review.like_users.count}}
