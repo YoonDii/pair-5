@@ -2,8 +2,13 @@
 
 * {
   font-family: 'Creepster', cursive;
+  color: black;
   
 }
+body {
+  background-color: #ce5632d7;
+}
+
 
 .base-navbar {
   background-color: rgb(52, 46, 127) !important;

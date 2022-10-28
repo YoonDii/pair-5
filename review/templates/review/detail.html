@@ -11,10 +11,9 @@
     writer :
     <a href={% url 'accounts:detail' review.user.pk %}>{{review.user}}</a>
   </p>
-  <p>{{ review.created_at }}</p>
   <p>{{ review.updated_at }}</p>
   {% if review.image %}
-    <p><img src='{{ review.image.url }}' alt='{{ review.image }}' style="width: 550px; ">
+    <p><img src='{{ review.image.url }}' alt='{{ review.image }}' style="width: 100%; ">
     </p>
   {% endif %}
 
@@ -73,7 +72,6 @@
   {% endfor %}
   <a href="{% url 'review:index' %}">back</a>
 {% endblock %}
-
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="{% static 'js/review/detail.js' %}"></script>
