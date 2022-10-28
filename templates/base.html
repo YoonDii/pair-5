@@ -29,7 +29,7 @@
                         <a class="nav-link" href="{% url 'accounts:detail' request.user.pk %}" style='color:white;'>Hi, {{ request.user.username }}</a> 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'accounts:login' %}" style='color:white;'>logout</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'accounts:logout' %}" style='color:white;'>logout</a>
                     </li>
                 </ul>
                 {% else %}
