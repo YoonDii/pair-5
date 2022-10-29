@@ -4,6 +4,7 @@ from .forms import CommentForm, ReviewForm
 from .models import Comment, Review
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 
@@ -37,7 +38,7 @@ def detail(request, review_pk):
         "comment_form": comment_form,
         "comments": review.comment_set.all(),
     }
-    
+
     return render(request, "review/detail.html", context)
 
 
@@ -78,16 +79,16 @@ def comment_delete(request, comment_pk, review_pk):
     comment.delete()
     return redirect("review:detail", review_pk)
 
+
 def comment_update(request, review_pk, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
 
-    data = {
-        'comment_content': comment.content
-    }
-    
+    data = {"comment_content": comment.content}
+
     return JsonResponse(data)
 
-def comment_update_complete(request,review_pk, comment_pk):
+
+def comment_update_complete(request, review_pk, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
     comment_form = CommentForm(request.POST, instance=comment)
 
@@ -95,16 +96,17 @@ def comment_update_complete(request,review_pk, comment_pk):
         comment = comment_form.save()
 
         data = {
-            'comment_content': comment.content,
+            "comment_content": comment.content,
         }
 
         return JsonResponse(data)
-    
+
     data = {
-        'comment_content': comment.content,
+        "comment_content": comment.content,
     }
 
     return JsonResponse(data)
+
 
 @login_required
 def like(request, review_pk):
@@ -122,7 +124,28 @@ def like(request, review_pk):
     # 상세 페이지로 redirect
 
     data = {
-        'like_cnt': review.like_users.count(),
+        "like_cnt": review.like_users.count(),
     }
 
     return JsonResponse(data)
+
+
+def search(request):
+    all_data = Review.objects.order_by("-pk")
+    search = request.GET.get("search", "")
+    if search:
+        search_list = all_data.filter(
+            Q(title__icontains=search)
+            | Q(content__icontains=search)
+            # | Q(user__icontains=search) #FK라서 검색불가
+        )
+
+        context = {
+            "search_list": search_list,
+        }
+    else:
+        context = {
+            "search_list": all_data,
+        }
+
+    return render(request, "review/search.html", context)
