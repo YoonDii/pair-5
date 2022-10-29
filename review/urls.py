@@ -11,14 +11,23 @@ urlpatterns = [
     path("<int:review_pk>/", views.detail, name="detail"),
     path("<int:review_pk>/update/", views.update, name="update"),
     path("<int:review_pk>/delete/", views.delete, name="delete"),
-    # comment 
+    # comment
     path("<int:pk>/comments/", views.comment_create, name="comment_create"),
     path(
         "<int:review_pk>/comments/<int:comment_pk>/delete/",
         views.comment_delete,
         name="comment_delete",
     ),
-    path("<int:review_pk>/comments/<int:comment_pk>/update/", views.comment_update, name='comment_update'),
-    path("<int:review_pk>/comments/<int:comment_pk>/update/complete/", views.comment_update_complete, name='comment_update_complete'),
+    path(
+        "<int:review_pk>/comments/<int:comment_pk>/update/",
+        views.comment_update,
+        name="comment_update",
+    ),
+    path(
+        "<int:review_pk>/comments/<int:comment_pk>/update/complete/",
+        views.comment_update_complete,
+        name="comment_update_complete",
+    ),
     path("<int:review_pk>/like/", views.like, name="like"),
+    path("review/search/", views.search, name="search"),
 ]
