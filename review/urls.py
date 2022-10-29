@@ -29,5 +29,5 @@ urlpatterns = [
         name="comment_update_complete",
     ),
     path("<int:review_pk>/like/", views.like, name="like"),
-    path("review/search/", views.search, name="search"),
+    path("search/", views.search, name="search"),
 ]

@@ -3,7 +3,7 @@
 <div class='text-center'>
     <h1>🎃let's die listening to music🎃</h1>
 
-<a  href="{% url 'review:create'  %}" class="btn btn-outline-dark-pill"><h4>CREATE</h4></a>
+<a  href="{% url 'review:create' %}" class="text-decoration-none"><h4>CREATE</h4></a>
 </div>
 {% for review in reviews %}
     <a href="{% url 'review:detail' review.pk %}"><p>{{ review.title }}</p></a>
