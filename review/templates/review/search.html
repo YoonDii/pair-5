@@ -4,20 +4,23 @@
 {% bootstrap_javascript %}
 {% load static %}
 {% block content %}
-
+<div class='text-center'>
+  <h1 class="mb-4">😈 Result of Search 😈</h1>
+</div>
+<hr>
   <div class="container ">
-    <table class="table mb-5 border border-3">
+    <table class="table mb-5 ">
       <thead>
         <tr>
           <th scope="col">No.</th>
           <th scope="col">title</th>
           <th scope="col">content</th>
+          <th scope="col">Grade</th>
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        {% for page_number in question_list.paginator.page_range %}
-        {% for review in search_list %}
-        {% if page_number >= question_list.number|add:-5 and page_number <= question_list.number|add:5 %}
+        {% if question_list %}
+        {% for review in question_list %}
           <tr>
             <th scope="row">{{review.id}}</th>
             <td>
@@ -40,9 +43,8 @@
               {% endif %}
             </td>
           </tr>
+          {% endfor %}
           {% endif %}
-          {% endfor %}
-          {% endfor %}
         </tbody>
       </table>
     </div>
@@ -60,6 +62,7 @@
       {% endif %}
       <!-- 페이지리스트 -->
       {% for page_number in question_list.paginator.page_range %}
+      {% if page_number >= question_list.number|add:-5 and page_number <= question_list.number|add:5 %}
       {% if page_number == question_list.number %}
       <li class="page-item active" aria-current="page">
           <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
@@ -68,6 +71,7 @@
       <li class="page-item">
           <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
       </li>
+      {% endif %}
       {% endif %}
       {% endfor %}
       <!-- 다음페이지 -->
@@ -81,5 +85,4 @@
       </li>
       {% endif %}
   </ul>
-
     {% endblock%}
