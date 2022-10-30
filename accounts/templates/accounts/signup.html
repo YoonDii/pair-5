@@ -2,10 +2,10 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-  <h1 class='text-center my-3'>회원가입</h1>
+  <h1 class='text-center my-3'>Welcome!</h1>
   <form action="{% url 'accounts:signup' %}" method='POST' style='width: 500px;' class='m-auto'>
     {% csrf_token %}
     {% bootstrap_form signup_form %}
-    <input class="btn btn-primary float-end" type="submit" value="가입">
+    <input class="bnt my-3 float-end" style='color:#937DC2' type="submit" value="OK">
   </form>
 {% endblock content %}

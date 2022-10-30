@@ -42,7 +42,7 @@ commentUpdateBtns.forEach((commentUpdateBtn) => {
 
     commentUpdateForm.insertAdjacentHTML('beforeend', `
     <textarea name='content' col='40' rows='10' class='form-control' required>${content.innerText}</textarea>
-    <input class='btn-my-3' style='color:#937DC2' type='submit' value='OK'>
+    <input class=' my-3' style='color:#937DC2' type='submit' value='OK'>
     `)
 
     commentBlock.append(commentUpdateForm)

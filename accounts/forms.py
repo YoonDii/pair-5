@@ -4,6 +4,7 @@ from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
+
 class CustomUserCreationForm(UserCreationForm):
     password1 = forms.CharField(
         label=_("Password"),
@@ -15,6 +16,15 @@ class CustomUserCreationForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password"}),
         strip=False,
     )
+
     class Meta:
         model = get_user_model()
-        fields = ('username', 'email', )
+        fields = (
+            "username",
+            "email",
+        )
+        # labels = {
+        #     "username": "username",
+        #     "email": "email",
+        #     "password1" : "password",
+        # }

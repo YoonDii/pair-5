@@ -9,7 +9,7 @@
 <form action='' method='POST' enctype='multipart/form-data'>
     {% csrf_token %}
     {% bootstrap_form review_form %}
-    <input type="submit" value="수정">
+    <input type="submit" class="bnt my-3"  value="수정">
 </form>
-<a href="{% url 'review:index' %}">index 페이지</a>
+<a href="{% url 'review:index' %}" class="text-decoration-none" style="color: rgb(52, 46, 127);">back</a>
 {% endblock %}
