@@ -20,6 +20,8 @@
             <th scope="col">Title</th>
             <th scope="col">User name</th>
             <th scope="col">Content</th>
+            <th scope="col">Grade</th>
+
         </tr>
         </thead>
         <tbody>
@@ -31,6 +33,17 @@
             <td><a href="{% url 'accounts:detail' review.user.pk%}" class="text-black fw-bold text-decoration-none">
                 {{review.user}}</td>
             <td>{{review.content}}</td>
+            <td>{% if review.grade == 5 %}
+                ⭐⭐⭐⭐⭐
+              {% elif review.grade == 4 %}
+                ⭐⭐⭐⭐
+              {% elif review.grade == 3 %}
+                ⭐⭐⭐
+              {% elif review.grade == 2 %}
+                ⭐⭐
+              {% elif review.grade == 1 %}
+                ⭐
+              {% endif %}</td>
         </tr>    
         </tbody>
     {% endfor %}

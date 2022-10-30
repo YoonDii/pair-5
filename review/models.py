@@ -3,7 +3,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from django.db import models
 from django.conf import settings
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class Review(models.Model):
@@ -23,6 +23,8 @@ class Review(models.Model):
         settings.AUTH_USER_MODEL, related_name="like_review"
     )
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    grade = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
 
 
 class Comment(models.Model):

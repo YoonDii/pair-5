@@ -22,3 +22,109 @@ body {
   width: 5rem;
 }
 /* .link:hover { cursor : url(css/halloween_custom_icon.png) 20 30, url(css/halloween_custom_icon.png) 20 30, auto; } */
+
+.page-link {
+  color: #999; 
+  background-color: #6c58bF;
+  border-color: #444;
+}
+
+.page-item.active .page-link {
+  z-index: 1;
+  color: #ccc;
+  font-weight:bold;
+  background-color: #333;
+  border-color: #444;
+ 
+}
+
+.page-link:focus, .page-link:hover {
+  color: #ccc;
+  background-color: #222;
+  border-color: #444;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.ghost {
+  animation: moveUpDown 3s infinite;
+  position: absolute;
+}
+
+@keyframes moveUpDown {
+  0% {
+      margin-top: 0px;
+  }
+
+  50% {
+      margin-top: -50px;
+  }
+
+  100% {
+      margin-top: 0px;
+  }
+}
+
+.ghost .body {
+  width: 90px;
+  height: 120px;
+  background-color: #fff;
+  border-top-left-radius: 45%;
+  border-top-right-radius: 45%;
+  position: relative;
+}
+
+.ghost .body .face {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 70px;
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ghost .body .face .eye {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+.ghost .body .face .mouse {
+  width: 30px;
+  height: 13px;
+  background-color: #333;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-left: 18px;
+  margin-top: 13px;
+}
+
+.ghost .bottom {
+  display: flex;
+
+}
+
+.ghost .bottom .leg {
+  background-color: #fff;
+  width: 18px;
+  height: 10px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.ghost .bottom .leg:nth-child(2n) {
+  position: relative;
+  top: -6px;
+  background-color: #000;
+  border-radius: 50%;
+}

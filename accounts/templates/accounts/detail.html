@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-  <h1 class='text-center my-3'>profile</h1>
+  <h1 class='text-center my-3'>🧛🏻‍♀️profile🧛🏻</h1>
   <div class="card">
     <div class="card-body">
       <p>ID:
@@ -39,11 +39,11 @@
   <br>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">글</button>
+      <button class="nav-link active text-black fw-bold text-decoration-none" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">글</button>
 
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">댓글</button>
+      <button class="nav-link text-black fw-bold text-decoration-none" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">댓글</button>
     </li>
 
   </ul>
@@ -54,7 +54,7 @@
       {% for review in user.review_set.all %}
         <p>
           {{ forloop.counter }}.
-          <a href="{% url 'review:detail' review.pk %}">{{ review.title }}</a>
+          <a href="{% url 'review:detail' review.pk %}" class="text-black fw-bold text-decoration-none">{{ review.title }}</a>
         </p>
       {% endfor %}
     </div>
@@ -63,12 +63,12 @@
       {% for comment in user.comment_set.all %}
         <p>
           {{ forloop.counter }}
-          .
-          <a href="{% url 'review:detail' comment.review_id %}">{{ comment.content }}</a>
+          <a href="{% url 'review:detail' comment.review_id %}" class="text-decoration-none" style="color: black;">{{ comment.content }}</a>
         </p>
       {% endfor %}
     </div>
-
+    <hr>
+    <a href="{% url 'review:index' %}" class="text-decoration-none" style="color: rgb(52, 46, 127);">back</a>
   </div>
 {% endblock content %}
 

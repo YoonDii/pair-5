@@ -70,7 +70,24 @@
         {% endif %}
     </section>
     <main class='container m-auto my-5'>
+        
         {% block content %}{% endblock %}
+        <div class="ghost">
+            <div class="body">
+                <div class="face">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
+                    <div class="mouse"></div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="leg"></div>
+                <div class="leg"></div>
+                <div class="leg"></div>
+                <div class="leg"></div>
+                <div class="leg"></div>
+            </div>
+        </div>
     </main>
 
     <footer class='container-fluid text-center position-fixed bottom-0' style='background-color: rgb(52, 46, 127) '>
@@ -82,8 +99,16 @@
             ☠️</h5>
     
     </footer>
+    
+    <script>
+        document.body.addEventListener("mousemove", function (e) {
+            console.log(e.pageX);
+            document.querySelector('.ghost').style.left = `${parseInt(e.pageX) + 20}px`;
+            document.querySelector('.ghost').style.top = `${parseInt(e.pageY) + 20}px`;
+        })
+    </script>
+    
     {% block js %}{% endblock js %}
-
-  </body>
+</body>
 
 </html>

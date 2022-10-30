@@ -3,13 +3,28 @@
 {% load static %}
 
 {% block content %}
-  <h1 class="text-center">review</h1>
+  <h1 class="text-center">🌗review🌓</h1>
   <div></div>
-  <p style="font-size: 1.5rem">Title :
+  <p style="font-size: 1.3rem">
+    Title :
     {{ review.title }}</p>
-  <p style="font-size: 1.5rem">
-    writer :
+  <p style="font-size: 1.3rem">
+    Writer :
     <a class="text-decoration-none" style="color: rgb(52, 46, 127);" href={% url 'accounts:detail' review.user.pk %}>{{review.user}}</a>
+  </p>
+  <p style="font-size: 1.3rem">
+    Grade :
+  {% if review.grade == 5 %}
+    ⭐⭐⭐⭐⭐
+  {% elif review.grade == 4 %}
+    ⭐⭐⭐⭐
+  {% elif review.grade == 3 %}
+    ⭐⭐⭐
+  {% elif review.grade == 2 %}
+    ⭐⭐
+  {% elif review.grade == 1 %}
+    ⭐
+  {% endif %}
   </p>
   <p>{{ review.updated_at }}</p>
   {% if review.image %}
@@ -20,7 +35,7 @@
   <p>content :
     {{ review.content }}</p>
   {% if request.user == review.user %}
-    <div class="d-flex ">
+    <div class="d-flex align-items-start">
       <p>
         <a href="{% url 'review:update' review.pk %}" class="btn btn-outline-dark">수정</a>
       </p>
@@ -60,17 +75,19 @@
         |
           <span class='comment-{{ comment.pk }}-content'>{{ comment.content }}</span>
       </p>
-      <form action="{% url 'review:comment_delete' review.pk comment.pk %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="삭제">
-      </form>
-      <a href="{% url 'review:comment_update' review.pk comment.pk %}" class="btn btn-primary comment-update-btn" data-review-pk='{{ review.pk }}' data-comment-pk='{{ comment.pk }}'>수정</a>
+      <div class="d-flex">
+        <a href="{% url 'review:comment_update' review.pk comment.pk %}" class="btn btn-outline-dark comment-update-btn" data-review-pk='{{ review.pk }}' data-comment-pk='{{ comment.pk }}'>수정</a>
+        <form action="{% url 'review:comment_delete' review.pk comment.pk %}" method="POST" class="my-0">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-outline-danger mx-2" value="삭제">
+        </form>
+      </div>
     </article>
     <hr>
     {% empty %}
     <p>아직 아무도 못본거라고 믿자,,</p>
   {% endfor %}
-  <a class="text-black text-decoration-none" href="{% url 'review:index' %}">back</a>
+  <a href="{% url 'review:index' %}" class="text-decoration-none" style="color: rgb(52, 46, 127);">back</a>
 {% endblock %}
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
