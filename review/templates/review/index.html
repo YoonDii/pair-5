@@ -1,12 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class='text-center'>
-    <h1>🎃let's die listening to music🎃</h1>
+    <h1 class="mb-4">🎃let's die listening to music🎃</h1>
 
-<a  href="{% url 'review:create' %}" class="text-decoration-none"><h4>CREATE</h4></a>
+<a href="{% url 'review:create' %}" class="text-decoration-none"><h4>CREATE</h4></a>
 </div>
-{% for review in reviews %}
-    <a href="{% url 'review:detail' review.pk %}"><p>{{ review.title }}</p></a>
-{% endfor %}
+<hr>
+
+{% comment %} {% for review in reviews %}
+    <a href="{\% url 'review:detail' review.pk \%}"><p>{{ review.title }}</p></a>
+
+    
+{% endfor %} {% endcomment %}
+
+<table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">User name</th>
+            <th scope="col">Content</th>
+        </tr>
+        </thead>
+        <tbody>
+    {% for review in reviews %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td><a href="{% url 'review:detail' review.pk%}" class="text-black fw-bold text-decoration-none">
+                {{review.title}}</td>
+            <td><a href="{% url 'accounts:detail' review.user.pk%}" class="text-black fw-bold text-decoration-none">
+                {{review.user}}</td>
+            <td>{{review.content}}</td>
+        </tr>    
+        </tbody>
+    {% endfor %}
+</table>
+    
 
 {% endblock %}

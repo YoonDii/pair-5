@@ -1,8 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Nosifer&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Eater&display=swap');
 
 * {
-  font-family: 'Creepster', cursive;
+  /* font-family: 'Creepster', cursive; */
+  /* font-family: 'Nosifer', cursive; */
+  font-family: 'Eater', cursive;
   color: black;
+  font-size: large;
   
 }
 body {
@@ -16,4 +21,4 @@ body {
 .music-logo {
   width: 5rem;
 }
-
+/* .link:hover { cursor : url(css/halloween_custom_icon.png) 20 30, url(css/halloween_custom_icon.png) 20 30, auto; } */

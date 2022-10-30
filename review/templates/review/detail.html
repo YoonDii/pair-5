@@ -3,13 +3,13 @@
 {% load static %}
 
 {% block content %}
-  <h2 class="text-center">review</h2>
+  <h1 class="text-center">review</h1>
   <div></div>
-  <p>Title :
+  <p style="font-size: 1.5rem">Title :
     {{ review.title }}</p>
-  <p>
+  <p style="font-size: 1.5rem">
     writer :
-    <a href={% url 'accounts:detail' review.user.pk %}>{{review.user}}</a>
+    <a class="text-decoration-none" style="color: rgb(52, 46, 127);" href={% url 'accounts:detail' review.user.pk %}>{{review.user}}</a>
   </p>
   <p>{{ review.updated_at }}</p>
   {% if review.image %}
@@ -70,7 +70,7 @@
     {% empty %}
     <p>아직 아무도 못본거라고 믿자,,</p>
   {% endfor %}
-  <a href="{% url 'review:index' %}">back</a>
+  <a class="text-black text-decoration-none" href="{% url 'review:index' %}">back</a>
 {% endblock %}
 {% block js %}
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
