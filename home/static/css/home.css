@@ -1,8 +1,13 @@
 /* 애플페이지*/
+@import url('https://fonts.googleapis.com/css2?family=Eater&display=swap');
+* {
+  font-family: 'Eater', cursive;
+}
 
 html {
   scroll-behavior: smooth;
 }
+
 body {
   margin: 0;
   background: #000;
@@ -10,15 +15,56 @@ body {
   height: 100vh;
   overflow: auto;
 }
+
 section {
   display: flex;
   justify-content: center;
 }
+
 video {
   position: fixed;
   z-index: 0;
   max-width: 100%;
 }
+
+
+code {
+  font-family: monospace;
+  background: #333;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.bell {
+  display: none;
+}
+
+.scroll-bell {
+  z-index: 2;
+  z-index: 1;
+  position: fixed;
+  display: block;
+  width: 30%;
+  margin: 0 auto;
+  top: 14rem;
+  left: 35rem;
+}
+
+.noaml-bell {
+  background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FmlDd0%2FbtrPPODJUOx%2FhkdbSSW5IYuk3uQ53jwTo0%2Fimg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.noaml-bell:hover {
+  background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fqia9A%2FbtrPQdwiGEO%2F9ZlneJbxguKfpvMKKunupk%2Fimg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+
 .scroll-dummy {
   height: 2000px;
   max-width: 998px;
@@ -34,16 +80,24 @@ video {
   color: white;
 }
 
-.scroll-dummy p, .scroll-dummy a {
+.scroll-dummy p,
+.scroll-dummy a {
   font-size: 20px;
   color: #ccc;
   line-height: 1.4;
 }
 
-code {
-  font-family: monospace;
-  background: #333;
-  border: 1px solid #999;
-  border-radius: 4px;
-  padding: 2px 4px;
+.start-img {
+  margin: 0 auto;
+  width: 400px;
+  height: 350px;
+
+}
+.welcome {
+  display: none;
+  position: fixed;
+  left: 50%;
+  bottom: 0px;
+  transform: translateX(-50%);
+  z-index:100;
 }
