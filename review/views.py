@@ -5,13 +5,20 @@ from .models import Comment, Review
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.core.paginator import Paginator 
 
 # Create your views here.
 
 
 def index(request):
     reviews = Review.objects.order_by("-pk")
-    context = {"reviews": reviews}
+    page = request.GET.get('page', '1')
+    paginator = Paginator(reviews, 3)
+    page_obj = paginator.get_page(page)
+    context = {
+        "reviews": reviews,
+        'question_list': page_obj
+    }
     return render(request, "review/index.html", context)
 
 
@@ -133,19 +140,24 @@ def like(request, review_pk):
 def search(request):
     all_data = Review.objects.order_by("-pk")
     search = request.GET.get("search", "")
+    page = request.GET.get('page', '1')  # 페이지
+    paginator = Paginator(all_data, 3)  # 페이지당 3개씩 보여주기
+    page_obj = paginator.get_page(page)
     if search:
         search_list = all_data.filter(
             Q(title__icontains=search)
             | Q(content__icontains=search)
             # | Q(user__icontains=search) #FK라서 검색불가
         )
-
+    
         context = {
             "search_list": search_list,
+            'question_list': page_obj,
         }
     else:
         context = {
             "search_list": all_data,
+            'question_list': page_obj,
         }
 
     return render(request, "review/search.html", context)
